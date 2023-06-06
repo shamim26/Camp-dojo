@@ -7,6 +7,9 @@ export default {
       fontFamily: {
         heading: ["Archivo", "sans-serif"],
       },
+      colors: {
+        custom1: "#ff4f03",
+      },
     },
   },
   plugins: [],
