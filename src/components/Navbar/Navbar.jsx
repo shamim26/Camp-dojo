@@ -1,8 +1,11 @@
 import { useState } from "react";
 import logo from "../../assets/logo(2).png";
 import { Link } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
+import { Tooltip } from "@material-tailwind/react";
 
 const Navbar = () => {
+  const { user } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -41,13 +44,23 @@ const Navbar = () => {
         <Link to="/">Home</Link>
         <Link to="/instructors"> Instructors</Link>
         <Link to="/classes">Classes</Link>
-        <Link to="/dashboard">Dashboard</Link>
-        <Link to="/login">Login</Link>
+        {user && <Link to="/dashboard">Dashboard</Link>}
+        {!user && <Link to="/login">Login</Link>}
 
-        <div className="flex flex-col md:flex-row gap-3 items-center md:ml-[18rem]">
-          <img src="" alt="profile" />
-          <button className="font-medium text-white uppercase">Log Out</button>
-        </div>
+        {user && (
+          <div className="flex flex-col md:flex-row gap-3 items-center md:ml-[18rem]">
+            <Tooltip content={user?.displayName}>
+              <img
+                className="w-[40px] h-[40px] rounded-full object-cover"
+                src={user?.photoURL}
+                alt="profile"
+              />
+            </Tooltip>
+            <button className="font-medium text-white uppercase">
+              Log Out
+            </button>
+          </div>
+        )}
       </div>
       <button className="md:hidden" onClick={() => setIsOpen(true)}>
         <svg
