@@ -7,7 +7,7 @@ const Footer = () => {
       <h2 className="text-xl font-medium">Newsletter</h2>
       <div className="relative">
         <input
-          className="py-3 px-4 w-[25rem] rounded-full text-black outline-none"
+          className="py-3 px-4 w-full md:w-[25rem] rounded-full text-black outline-none"
           type="email"
           placeholder="Please, enter your email address"
         />
