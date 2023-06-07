@@ -2,8 +2,10 @@ import { Button } from "@material-tailwind/react";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
 
 const Login = () => {
+  const { signIn, googleSignIn } = useAuth();
   const [hidden, setHidden] = useState(true);
   const {
     register,
@@ -11,7 +13,23 @@ const Login = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => {
+    signIn(data?.email, data?.password)
+      .then((result) => {
+        const loggedUser = result.user;
+        console.log(loggedUser);
+      })
+      .catch((err) => console.error(err));
+  };
+
+  //   google sign in
+  const handleGoogleSignIn = () => {
+    googleSignIn()
+      .then((result) => {
+        const user = result.user;
+      })
+      .catch((err) => console.error(err));
+  };
 
   return (
     <div className="h-screen bg-[#414045]">
@@ -78,7 +96,10 @@ const Login = () => {
             </span>
           </div>
           <small className="font-light cursor-pointer"> Or login with</small>
-          <span className="flex cursor-pointer items-center gap-2 bg-blue-gray-200 bg-opacity-30 w-1/4 px-1 rounded-md">
+          <span
+            onClick={handleGoogleSignIn}
+            className="flex cursor-pointer items-center gap-2 bg-blue-gray-200 bg-opacity-30 w-1/4 px-1 rounded-md"
+          >
             <svg
               viewBox="0 0 1024 1024"
               fill="currentColor"

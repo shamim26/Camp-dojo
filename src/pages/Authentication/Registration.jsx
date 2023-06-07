@@ -2,22 +2,45 @@ import { Button } from "@material-tailwind/react";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
 
 const Registration = () => {
+  const { createUser, updateUser, googleSignIn } = useAuth();
+
   const [passwordError, setPasswordError] = useState("");
+
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
     if (data?.password !== data?.confirmPassword) {
       return setPasswordError("Please confirm password");
-    }else{
-        setPasswordError('')
+    } else {
+      setPasswordError("");
     }
     console.log(data);
+    createUser(data?.email, data?.confirmPassword)
+      .then((result) => {
+        const user = result.user;
+        updateUser(data?.name, data?.photoUrl);
+        console.log(user);
+        reset();
+      })
+      .catch((err) => console.error(err));
   };
+
+  //   google sign in
+  const handleGoogleSignIn = () => {
+    googleSignIn()
+      .then((result) => {
+        const user = result.user;
+      })
+      .catch((err) => console.error(err));
+  };
+
   return (
     <div className="h-screen bg-[#414045]">
       <div className="w-1/2 mx-auto py-10 text-white">
@@ -55,8 +78,8 @@ const Registration = () => {
           )}
           {errors.password?.type === "pattern" && (
             <small className="text-red-500">
-              Password must have one uppercase one spacial case and more than 6
-              character
+              Password must have one uppercase one spacial character and more
+              than 6 character
             </small>
           )}
           <input
@@ -68,7 +91,9 @@ const Registration = () => {
           {errors.confirmPassword && (
             <small className="text-red-500">Please confirm your password</small>
           )}
-          <small className="text-red-500">{passwordError}</small>
+          {passwordError && (
+            <small className="text-red-500">{passwordError}</small>
+          )}
           <input
             {...register("photoUrl", { required: true })}
             className=" rounded-full bg-opacity-30 outline-none bg-gray-500 py-2 px-3"
@@ -80,14 +105,17 @@ const Registration = () => {
               type="submit"
               className="bg-custom1 mr-4 hover:bg-gray-500 duration-300 rounded-full"
             >
-              Login
+              Register
             </Button>
             <span>
               <small className="font-light"> Or register with</small>
             </span>
           </div>
 
-          <span className="flex cursor-pointer items-center gap-2 bg-blue-gray-200 bg-opacity-30 w-1/4 px-1 rounded-md">
+          <span
+            onClick={handleGoogleSignIn}
+            className="flex cursor-pointer items-center gap-2 bg-blue-gray-200 bg-opacity-30 w-1/4 px-1 rounded-md"
+          >
             <svg
               viewBox="0 0 1024 1024"
               fill="currentColor"
