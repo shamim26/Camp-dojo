@@ -6,7 +6,7 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="bg-custom1 uppercase py-1 flex justify-between items-center px-10">
+    <div className="bg-custom1 sticky top-0 z-10 bg-opacity-70 uppercase py-1 flex justify-between items-center px-10">
       <img
         className="md:w-[280px] w-[200px] md:h-[90px] object-contain cursor-pointer  "
         src={logo}

@@ -1,8 +1,12 @@
 /** @type {import('tailwindcss').Config} */
-export default {
+const withMT = require("@material-tailwind/react/utils/withMT");
+
+module.exports = withMT({
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
-    fontFamily: ["Roboto", "sans-serif"],
+    fontFamily: {
+      sans: ["Roboto", "sans-serif"],
+    },
     extend: {
       fontFamily: {
         heading: ["Archivo", "sans-serif"],
@@ -13,7 +17,7 @@ export default {
     },
   },
   plugins: [],
-};
+});
 
 // colors:
 
