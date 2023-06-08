@@ -8,6 +8,7 @@ import Registration from "../pages/Authentication/Registration";
 import AllInstructor from "../pages/AllInstructor/AllInstructor";
 import Classes from "../pages/Classes/Classes";
 import MyClasses from "../pages/Dashboard/Student/MyClasses";
+import Payment from "../pages/Dashboard/Student/Payment/Payment";
 
 const router = createBrowserRouter([
   {
@@ -46,6 +47,10 @@ const router = createBrowserRouter([
       {
         path: "my-classes",
         element: <MyClasses />,
+      },
+      {
+        path: "payment",
+        element: <Payment />,
       },
     ],
   },
