@@ -15,7 +15,7 @@ const MyClasses = () => {
     enabled: !loading,
     queryFn: async () => {
       const res = await fetch(
-        `http://localhost:5100/selected-classes?email=rejashamim00@gmail.com`
+        `http://localhost:5100/selected-classes?email=${user?.email}`
       );
       return res.json();
     },
@@ -91,6 +91,10 @@ const MyClasses = () => {
                   <td className="p-4 border-b border-blue-gray-50 text-gray-700">
                     <Link
                       to="/dashboard/payment"
+                      state={{
+                        price: classItem?.price,
+                        classItem: classItem,
+                      }}
                       className="px-3 py-1 bg-custom1 text-white rounded-xl"
                     >
                       Pay
