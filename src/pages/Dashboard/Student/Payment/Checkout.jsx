@@ -16,7 +16,6 @@ const Checkout = ({ price, classItem }) => {
     axios
       .post("http://localhost:5100/create-payment-intents", { price })
       .then((res) => {
-        console.log(res.data.clientSecret);
         setClientSecret(res.data.clientSecret);
       });
   }, []);
@@ -59,7 +58,6 @@ const Checkout = ({ price, classItem }) => {
       console.log(paymentError);
     }
 
-    console.log(paymentIntent);
     if (paymentIntent.status === "succeeded") {
       setTransactionId(paymentIntent.id);
 

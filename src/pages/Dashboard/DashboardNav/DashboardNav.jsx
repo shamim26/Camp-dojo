@@ -21,11 +21,11 @@ const DashboardNav = () => {
             <BookOpenIcon className="h-6 w-6" />
             Selected Classes
           </Link>
-          <Link className="text-base font-medium flex gap-3">
+          <Link to='/dashboard/enrolled-classes' className="text-base font-medium flex gap-3">
             <ClipboardDocumentCheckIcon className="h-6 w-6" />
             Enrolled Classes
           </Link>
-          <Link className="text-base font-medium flex gap-3">
+          <Link to='/dashboard/payment-history' className="text-base font-medium flex gap-3">
             <CreditCardIcon className="h-6 w-6" />
             Payment History
           </Link>
