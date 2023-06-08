@@ -9,14 +9,14 @@ import React from "react";
 const SingleInstructor = ({ instructor }) => {
   return (
     <div>
-      <Card className="w-96 ">
+      <Card className=" shadow-none rounded-none">
         <CardHeader
           floated={false}
-          className="h-80 overflow-hidden shadow-none"
+          className="h-80 overflow-hidden shadow-none rounded-none m-0"
         >
           <img
             src={instructor?.image}
-            className="hover:scale-110 transition-all duration-300"
+            className="hover:scale-110 transition-all duration-300 rounded-none"
             alt="profile-picture"
           />
         </CardHeader>

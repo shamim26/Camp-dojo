@@ -12,9 +12,9 @@ const AllInstructor = () => {
     },
   });
   return (
-    <div className="">
+    <div className="bg-gray-100">
       <PageBanner heading={"Instructors"} />
-      <div className="container w-9/12 mx-auto grid grid-cols-1 gap-3 md:gap-10 md:grid-cols-3 my-32">
+      <div className="container w-9/12 mx-auto grid grid-cols-1 gap-3 md:gap-10 md:grid-cols-3 py-32">
         {instructors.map((instructor) => (
           <SingleInstructor key={instructor?._id} instructor={instructor} />
         ))}
