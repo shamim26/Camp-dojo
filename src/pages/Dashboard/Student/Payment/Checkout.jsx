@@ -2,6 +2,7 @@ import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import useAuth from "../../../../hooks/useAuth";
+import Swal from "sweetalert2";
 
 const Checkout = ({ price, classItem }) => {
   const stripe = useStripe();
@@ -68,7 +69,15 @@ const Checkout = ({ price, classItem }) => {
         transactionId: paymentIntent.id,
         price,
         date: new Date(),
+        classItem: classItem,
       };
+      axios
+        .post("http://localhost:5100/payments", paymentInfo)
+        .then((res) =>
+          res.data.paymentResult.insertedId
+            ? Swal.fire("Payment Succeed", "", "success")
+            : ""
+        );
     }
   };
   return (
