@@ -1,12 +1,17 @@
 import { Button } from "@material-tailwind/react";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 
 const Login = () => {
   const { signIn, googleSignIn } = useAuth();
   const [hidden, setHidden] = useState(true);
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const from = location.state?.from?.pathname || "/";
+
   const {
     register,
     handleSubmit,
@@ -18,6 +23,7 @@ const Login = () => {
       .then((result) => {
         const loggedUser = result.user;
         console.log(loggedUser);
+        navigate(from, { replace: true });
       })
       .catch((err) => console.error(err));
   };
@@ -27,6 +33,7 @@ const Login = () => {
     googleSignIn()
       .then((result) => {
         const user = result.user;
+        navigate(from, { replace: true });
       })
       .catch((err) => console.error(err));
   };

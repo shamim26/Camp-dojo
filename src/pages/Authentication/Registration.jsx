@@ -1,13 +1,13 @@
 import { Button } from "@material-tailwind/react";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 
 const Registration = () => {
   const { createUser, updateUser, googleSignIn } = useAuth();
-
   const [passwordError, setPasswordError] = useState("");
+  const navigate = useNavigate();
 
   const {
     register,
@@ -25,9 +25,11 @@ const Registration = () => {
     createUser(data?.email, data?.confirmPassword)
       .then((result) => {
         const user = result.user;
-        updateUser(data?.name, data?.photoUrl);
-        console.log(user);
-        reset();
+        updateUser(data?.name, data?.photoUrl).then(() => {
+          console.log(user);
+          reset();
+          navigate("/");
+        });
       })
       .catch((err) => console.error(err));
   };
@@ -37,13 +39,14 @@ const Registration = () => {
     googleSignIn()
       .then((result) => {
         const user = result.user;
+        navigate('/')
       })
       .catch((err) => console.error(err));
   };
 
   return (
     <div className="h-screen bg-[#414045]">
-      <div className="w-1/2 mx-auto py-10 text-white">
+      <div className="w-1/2 mx-auto py-32 text-white">
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="relative mb-4 flex flex-col gap-6 p-6 bg-[#212026] max-w-[440px] mx-auto"

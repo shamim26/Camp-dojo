@@ -5,11 +5,19 @@ import useAuth from "../../hooks/useAuth";
 import { Tooltip } from "@material-tailwind/react";
 
 const Navbar = () => {
-  const { user } = useAuth();
+  const { user, logOut } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
 
+  const handleLogout = () => {
+    logOut()
+      .then(() => {
+        console.log("logged out");
+      })
+      .catch((err) => console.error(err));
+  };
+
   return (
-    <div className="bg-custom1 sticky top-0 z-10 bg-opacity-75 uppercase py-1 flex justify-between items-center px-10">
+    <div className="bg-custom1 fixed top-0 right-0 left-0 z-10 bg-opacity-75 uppercase py-1 flex justify-between items-center px-10">
       <img
         className="md:w-[280px] w-[200px] md:h-[90px] object-contain cursor-pointer  "
         src={logo}
@@ -56,7 +64,10 @@ const Navbar = () => {
                 alt="profile"
               />
             </Tooltip>
-            <button className="font-medium text-white uppercase">
+            <button
+              onClick={handleLogout}
+              className="font-medium text-white uppercase"
+            >
               Log Out
             </button>
           </div>
