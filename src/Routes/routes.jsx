@@ -7,6 +7,7 @@ import Login from "../pages/Authentication/Login";
 import Registration from "../pages/Authentication/Registration";
 import AllInstructor from "../pages/AllInstructor/AllInstructor";
 import Classes from "../pages/Classes/Classes";
+import MyClasses from "../pages/Dashboard/Student/MyClasses";
 
 const router = createBrowserRouter([
   {
@@ -37,10 +38,16 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: "/dashboard",
+    path: "dashboard",
     element: <Dashboard />,
     errorElement: <ErrorPage />,
-    children: [{}],
+    children: [
+      // student routes
+      {
+        path: "my-classes",
+        element: <MyClasses />,
+      },
+    ],
   },
 ]);
 

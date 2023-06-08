@@ -6,9 +6,54 @@ import {
   Button,
   CardFooter,
 } from "@material-tailwind/react";
+import useAuth from "../../hooks/useAuth";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const SIngleClass = ({ singleClass }) => {
   const { availableSeats } = singleClass;
+  const { user } = useAuth();
+  const navigate = useNavigate();
+
+  const handleSelect = (clas) => {
+    if (user) {
+      const classOrder = {
+        classId: clas._id,
+        name: clas?.name,
+        image: clas?.image,
+        instructorEmail: clas?.instructorEmail,
+        seats: clas?.availableSeats,
+        price: clas?.price,
+        studentEmail: user?.email,
+      };
+      axios
+        .post("http://localhost:5100/selected-classes", classOrder)
+        .then((res) => {
+          if (res.data.insertedId) {
+            Swal.fire(
+              "Selected",
+              "Please go to dashboard for checkout",
+              "success"
+            );
+          }
+        });
+    } else {
+      Swal.fire({
+        title: "Please Login!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Login",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate("/login");
+        }
+      });
+    }
+  };
+
   return (
     <div>
       <Card
@@ -53,6 +98,7 @@ const SIngleClass = ({ singleClass }) => {
         </CardBody>
         <CardFooter className="pt-0">
           <Button
+            onClick={() => handleSelect(singleClass)}
             disabled={availableSeats === 0}
             ripple={false}
             fullWidth={true}
