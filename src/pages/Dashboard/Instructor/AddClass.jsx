@@ -11,7 +11,6 @@ const AddClass = () => {
   const { register, handleSubmit, reset } = useForm();
 
   const onSubmit = (data) => {
-    console.log(data);
     const formData = new FormData();
     formData.append("image", data.image[0]);
     fetch(
