@@ -1,7 +1,35 @@
-import { Card } from "@material-tailwind/react";
+import { Avatar, Button, Card } from "@material-tailwind/react";
+import axios from "axios";
 import React from "react";
+import { useQuery } from "react-query";
+import Swal from "sweetalert2";
 
 const ManageUser = () => {
+  const token = localStorage.getItem("access-token");
+
+  const { data: allUsers = [], refetch } = useQuery({
+    queryKey: ["all-users"],
+    queryFn: async () => {
+      const res = await fetch("http://localhost:5100/all-users", {
+        headers: { authorization: `bearer ${token}` },
+      });
+      return res.json();
+    },
+  });
+
+  const handleUpdateRole = (role) => {
+    axios
+      .put("http://localhost:5100/all-users", role, {
+        headers: { authorization: `bearer ${token}` },
+      })
+      .then((res) => {
+        if (res.data.modifiedCount > 0) {
+          Swal.fire("Role Updated", "", "success");
+          refetch();
+        }
+      });
+  };
+
   return (
     <div>
       <h1 className="text-center text-4xl font-heading font-bold mb-10">
@@ -16,13 +44,16 @@ const ManageUser = () => {
                   #
                 </th>
                 <th className="font-normal leading-none opacity-70 border-b border-blue-gray-100 bg-blue-gray-50 p-4">
-                   Name
+                  Image
                 </th>
                 <th className="font-normal leading-none opacity-70 border-b border-blue-gray-100 bg-blue-gray-50 p-4">
-                  Seats
+                  Name
                 </th>
                 <th className="font-normal leading-none opacity-70 border-b border-blue-gray-100 bg-blue-gray-50 p-4">
-                  Price
+                  Email
+                </th>
+                <th className="font-normal leading-none opacity-70 border-b border-blue-gray-100 bg-blue-gray-50 p-4">
+                  Role
                 </th>
                 <th className="font-normal leading-none opacity-70 border-b border-blue-gray-100 bg-blue-gray-50 p-4">
                   Action
@@ -33,23 +64,50 @@ const ManageUser = () => {
               </tr>
             </thead>
             <tbody>
-              {/* {selectedClasses.map((classItem, index) => (
+              {allUsers.map((user, index) => (
                 <tr key={index}>
                   <td className="p-4 border-b border-blue-gray-50 text-gray-700">
                     {index + 1}
                   </td>
                   <td className="p-4 border-b border-blue-gray-50 text-gray-700">
-                    {classItem?.name}
+                    <Avatar src={user?.image} alt="avatar" variant="rounded" />
                   </td>
                   <td className="p-4 border-b border-blue-gray-50 text-gray-700">
-                    {classItem?.seats}
+                    {user?.name}
                   </td>
                   <td className="p-4 border-b border-blue-gray-50 text-gray-700">
-                    ${classItem?.price}
+                    {user?.email}
                   </td>
-                  
+                  <td className="p-4 border-b border-blue-gray-50 text-gray-700">
+                    {user?.role}
+                  </td>
+                  <td className="p-4 border-b border-blue-gray-50 text-gray-700">
+                    <Button
+                      onClick={() =>
+                        handleUpdateRole({ role: "admin", email: user?.email })
+                      }
+                      disabled={user?.role === "admin"}
+                    >
+                      Make Admin
+                    </Button>
+                  </td>
+                  <td className="p-4 border-b border-blue-gray-50 text-gray-700">
+                    <Button
+                      onClick={() =>
+                        handleUpdateRole({
+                          role: "instructor",
+                          email: user?.email,
+                        })
+                      }
+                      disabled={
+                        user?.role === "admin" || user?.role === "instructor"
+                      }
+                    >
+                      Make Instructor
+                    </Button>
+                  </td>
                 </tr>
-              ))} */}
+              ))}
             </tbody>
           </table>
         </Card>
