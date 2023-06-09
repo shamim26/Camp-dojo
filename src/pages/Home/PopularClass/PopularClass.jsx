@@ -18,7 +18,7 @@ const PopularClass = () => {
       </h1>
       <Link
         className="flex justify-center text-custom1 text-sm font-semibold mb-16"
-        to="/all-classes"
+        to="/classes"
       >
         More Class
       </Link>

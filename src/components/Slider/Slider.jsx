@@ -9,7 +9,7 @@ const Slider = () => {
       autoplay={true}
       autoplayDelay={5000}
       loop={true}
-      navigation={""}
+      navigation={''}
       className="h-screen"
     >
       <div className="relative h-full w-full">
