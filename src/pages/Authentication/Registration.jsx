@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
+import axios from "axios";
 
 const Registration = () => {
   const { createUser, updateUser, googleSignIn } = useAuth();
@@ -26,9 +27,16 @@ const Registration = () => {
       .then((result) => {
         const user = result.user;
         updateUser(data?.name, data?.photoUrl).then(() => {
-          console.log(user);
-          reset();
-          navigate("/");
+          const userInfo = {
+            image: data?.photoUrl,
+            name: data?.name,
+            email: data?.email,
+            role: "student",
+          };
+          axios.post("http://localhost:5100/users", userInfo).then((res) => {
+            reset();
+            navigate("/");  
+          });
         });
       })
       .catch((err) => console.error(err));
@@ -39,7 +47,7 @@ const Registration = () => {
     googleSignIn()
       .then((result) => {
         const user = result.user;
-        navigate('/')
+        navigate("/");
       })
       .catch((err) => console.error(err));
   };
