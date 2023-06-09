@@ -21,8 +21,8 @@ const GoogleSignIn = () => {
           if (res.data.insertedId) {
             navigate("/");
           }
+          navigate("/");
         });
-        console.log(user);
       })
       .catch((err) => console.error(err));
   };

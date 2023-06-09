@@ -26,8 +26,8 @@ const AddClass = () => {
             name: data?.name,
             instructorName: data?.instructorName,
             instructorEmail: data?.instructorEmail,
-            availableSeats: data?.availableSeats,
-            price: data?.price,
+            availableSeats: parseInt(data?.availableSeats),
+            price: parseFloat(data?.price),
             status: "pending",
             enrolledStudents: 0,
           };

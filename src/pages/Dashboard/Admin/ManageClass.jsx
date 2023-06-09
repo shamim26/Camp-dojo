@@ -2,6 +2,8 @@ import { Avatar, Button, Card } from "@material-tailwind/react";
 import React, { useState } from "react";
 import { useQuery } from "react-query";
 import Modal from "../../../components/Modal/Modal";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 const ManageClass = () => {
   const token = localStorage.getItem("access-token");
@@ -20,8 +22,19 @@ const ManageClass = () => {
     },
   });
 
-  const handleUpdateStatus = () => {
+  const handleUpdateStatus = (data) => {
     // TODO: update status of classes to approved or denied
+    console.log(data);
+    axios
+      .put("http://localhost:5100/classes-status", data, {
+        headers: { authorization: `bearer ${token}` },
+      })
+      .then((res) => {
+        if (res.data.modifiedCount > 0) {
+          Swal.fire(`Class ${data?.status}`, "", "info");
+          refetch();
+        }
+      });
   };
 
   const handleOpen = (id) => {
@@ -103,10 +116,10 @@ const ManageClass = () => {
                     <p
                       className={
                         classItem.status === "approved"
-                          ? "text-green-500"
+                          ? "text-green-600"
                           : classItem.status === "pending"
-                          ? "text-yellow-500"
-                          : "text-red-500"
+                          ? "text-yellow-600"
+                          : "text-red-600"
                       }
                     >
                       {classItem?.status}
@@ -115,6 +128,12 @@ const ManageClass = () => {
                   <td className="p-4 border-b border-blue-gray-50 text-gray-700">
                     <div className="space-y-2">
                       <Button
+                        onClick={() =>
+                          handleUpdateStatus({
+                            status: "approved",
+                            id: classItem?._id,
+                          })
+                        }
                         disabled={
                           classItem?.status === "approved" ||
                           classItem?.status === "denied"
@@ -124,6 +143,12 @@ const ManageClass = () => {
                         Approve
                       </Button>
                       <Button
+                        onClick={() =>
+                          handleUpdateStatus({
+                            status: "denied",
+                            id: classItem?._id,
+                          })
+                        }
                         disabled={
                           classItem?.status === "approved" ||
                           classItem?.status === "denied"
@@ -142,11 +167,7 @@ const ManageClass = () => {
                     >
                       Feedback
                     </Button>
-                    <Modal
-                      open={open}
-                      handleOpen={handleOpen}
-                      id={modalData}
-                    />
+                    <Modal open={open} handleOpen={handleOpen} id={modalData} />
                   </td>
                 </tr>
               ))}

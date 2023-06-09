@@ -11,10 +11,8 @@ const Modal = ({ open, handleOpen, id }) => {
       id: id,
       feedback: feedback,
     };
-    console.log(newData);
     reset();
     handleOpen();
-    // TODO: update feedback to all classes in databaseS.
     axios
       .put("http://localhost:5100/classes-feedback", newData, {
         headers: { authorization: `bearer ${token}` },
