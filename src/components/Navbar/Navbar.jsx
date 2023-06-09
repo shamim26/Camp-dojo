@@ -62,6 +62,7 @@ const Navbar = () => {
                 className="w-[40px] h-[40px] rounded-full object-cover"
                 src={user?.photoURL}
                 alt="profile"
+                referrerPolicy="no-referrer"
               />
             </Tooltip>
             <button

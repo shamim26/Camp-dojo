@@ -1,13 +1,29 @@
+import axios from "axios";
 import { useForm } from "react-hook-form";
+import Swal from "sweetalert2";
 
-const Modal = ({ open, handleOpen, classItem }) => {
+const Modal = ({ open, handleOpen, id }) => {
+  const token = localStorage.getItem("access-token");
   const { register, handleSubmit, reset } = useForm();
-
   const onSubmit = (data) => {
-    console.log(data);
-    reset()
-    handleOpen()
+    const { feedback } = data;
+    const newData = {
+      id: id,
+      feedback: feedback,
+    };
+    console.log(newData);
+    reset();
+    handleOpen();
     // TODO: update feedback to all classes in databaseS.
+    axios
+      .put("http://localhost:5100/classes-feedback", newData, {
+        headers: { authorization: `bearer ${token}` },
+      })
+      .then((res) => {
+        if (res.data.modifiedCount > 0) {
+          Swal.fire("feedback sent", "", "success");
+        }
+      });
   };
   return (
     <div>
@@ -16,6 +32,8 @@ const Modal = ({ open, handleOpen, classItem }) => {
           <div className="bg-white p-6 rounded shadow-md">
             <h2 className="text-lg font-semibold mb-4">Feedback</h2>
             <form onSubmit={handleSubmit(onSubmit)}>
+              {/* <input {...register("id")} type="text" value={classItem} /> */}
+              {/* <img src={classItem?.image} alt="" /> */}
               <textarea
                 {...register("feedback")}
                 className="border-4"

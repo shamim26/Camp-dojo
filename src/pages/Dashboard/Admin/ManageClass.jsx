@@ -6,6 +6,7 @@ import Modal from "../../../components/Modal/Modal";
 const ManageClass = () => {
   const token = localStorage.getItem("access-token");
   const [open, setOpen] = useState(false);
+  const [modalData, setModalData] = useState(null);
 
   const { data: allClass = [], refetch } = useQuery({
     queryKey: ["all-classes"],
@@ -23,7 +24,10 @@ const ManageClass = () => {
     // TODO: update status of classes to approved or denied
   };
 
-  const handleOpen = () => setOpen(!open);
+  const handleOpen = (id) => {
+    setOpen(!open);
+    setModalData(id);
+  };
 
   return (
     <div>
@@ -132,13 +136,16 @@ const ManageClass = () => {
                     </div>
                   </td>
                   <td className="p-4 border-b border-blue-gray-50 text-gray-700">
-                    <Button onClick={handleOpen} color="deep-orange">
+                    <Button
+                      onClick={() => handleOpen(classItem?._id)}
+                      color="deep-orange"
+                    >
                       Feedback
                     </Button>
                     <Modal
                       open={open}
                       handleOpen={handleOpen}
-                      classItem={classItem}
+                      id={modalData}
                     />
                   </td>
                 </tr>

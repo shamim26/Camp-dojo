@@ -70,7 +70,12 @@ const ManageUser = () => {
                     {index + 1}
                   </td>
                   <td className="p-4 border-b border-blue-gray-50 text-gray-700">
-                    <Avatar src={user?.image} alt="avatar" variant="rounded" />
+                    <Avatar
+                      src={user?.image}
+                      referrerPolicy="no-referrer"
+                      alt="avatar"
+                      variant="rounded"
+                    />
                   </td>
                   <td className="p-4 border-b border-blue-gray-50 text-gray-700">
                     {user?.name}
