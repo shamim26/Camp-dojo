@@ -4,13 +4,19 @@ import { useQuery } from "react-query";
 import { Card } from "@material-tailwind/react";
 
 const EnrolledClass = () => {
+  const token = localStorage.getItem("access-token");
   const { user, loading } = useAuth();
   const { data: enrolledClasses = [], refetch } = useQuery({
     queryKey: ["enrolled-classes", user?.email],
     enabled: !loading,
     queryFn: async () => {
       const res = await fetch(
-        `http://localhost:5100/enrolled-classes?email=${user?.email}`
+        `http://localhost:5100/enrolled-classes?email=${user?.email}`,
+        {
+          headers: {
+            authorization: `bearer ${token}`,
+          },
+        }
       );
       return res.json();
     },

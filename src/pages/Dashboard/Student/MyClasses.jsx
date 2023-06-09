@@ -6,16 +6,21 @@ import { TrashIcon } from "@heroicons/react/24/solid";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import axios from "axios";
-import { data } from "autoprefixer";
 
 const MyClasses = () => {
+  const token = localStorage.getItem("access-token");
   const { user, loading } = useAuth();
   const { data: selectedClasses = [], refetch } = useQuery({
     queryKey: ["selected-classes", user?.email],
     enabled: !loading,
     queryFn: async () => {
       const res = await fetch(
-        `http://localhost:5100/selected-classes?email=${user?.email}`
+        `http://localhost:5100/selected-classes?email=${user?.email}`,
+        {
+          headers: {
+            authorization: `bearer ${token}`,
+          },
+        }
       );
       return res.json();
     },

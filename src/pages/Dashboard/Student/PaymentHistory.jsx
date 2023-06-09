@@ -5,13 +5,19 @@ import useAuth from "../../../hooks/useAuth";
 import moment from "moment/moment";
 
 const PaymentHistory = () => {
+  const token = localStorage.getItem("access-token");
   const { user, loading } = useAuth();
   const { data: paymentHistory = [] } = useQuery({
     queryKey: ["payment-history", user?.email],
     enabled: !loading,
     queryFn: async () => {
       const res = await fetch(
-        `http://localhost:5100/payment-history?email=${user?.email}`
+        `http://localhost:5100/payment-history?email=${user?.email}`,
+        {
+          headers: {
+            authorization: `bearer ${token}`,
+          },
+        }
       );
       return res.json();
     },

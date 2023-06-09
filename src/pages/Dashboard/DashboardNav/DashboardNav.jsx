@@ -5,11 +5,23 @@ import {
   ClipboardDocumentCheckIcon,
   HomeIcon,
   UserGroupIcon,
+  ArrowRightOnRectangleIcon,
 } from "@heroicons/react/24/solid";
 import logo from "../../../assets/logo(2).png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import useAuth from "../../../hooks/useAuth";
 
 const DashboardNav = () => {
+  const { logOut } = useAuth();
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    logOut()
+      .then(() => {
+        console.log("logged out");
+        navigate("/login");
+      })
+      .catch((err) => console.error(err));
+  };
   return (
     <div>
       <Card className="fixed top-0 left-0 w-full h-screen overflow-auto rounded-none max-w-[20rem] p-4 bg-[#f2ad85]">
@@ -17,15 +29,24 @@ const DashboardNav = () => {
           <img src={logo} alt="" />
         </div>
         <List className="flex flex-col ml-6 gap-5">
-          <Link to="/dashboard/my-classes" className="text-base font-medium flex gap-3">
+          <Link
+            to="/dashboard/my-classes"
+            className="text-base font-medium flex gap-3"
+          >
             <BookOpenIcon className="h-6 w-6" />
             Selected Classes
           </Link>
-          <Link to='/dashboard/enrolled-classes' className="text-base font-medium flex gap-3">
+          <Link
+            to="/dashboard/enrolled-classes"
+            className="text-base font-medium flex gap-3"
+          >
             <ClipboardDocumentCheckIcon className="h-6 w-6" />
             Enrolled Classes
           </Link>
-          <Link to='/dashboard/payment-history' className="text-base font-medium flex gap-3">
+          <Link
+            to="/dashboard/payment-history"
+            className="text-base font-medium flex gap-3"
+          >
             <CreditCardIcon className="h-6 w-6" />
             Payment History
           </Link>
@@ -40,6 +61,13 @@ const DashboardNav = () => {
             <UserGroupIcon className="h-6 w-6" />
             Classes
           </Link>
+          <button
+            onClick={handleLogout}
+            className="text-base font-medium flex gap-3"
+          >
+            <ArrowRightOnRectangleIcon className="h-6 w-6" />
+            Log out
+          </button>
         </List>
       </Card>
     </div>

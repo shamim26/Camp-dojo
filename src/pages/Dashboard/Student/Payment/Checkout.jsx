@@ -8,13 +8,22 @@ const Checkout = ({ price, classItem }) => {
   const stripe = useStripe();
   const elements = useElements();
   const { user } = useAuth();
+  const token = localStorage.getItem("access-token");
   const [cardError, setCardError] = useState("");
   const [clientSecret, setClientSecret] = useState("");
   const [transactionId, setTransactionId] = useState("");
 
   useEffect(() => {
     axios
-      .post("http://localhost:5100/create-payment-intents", { price })
+      .post(
+        "http://localhost:5100/create-payment-intents",
+        { price },
+        {
+          headers: {
+            authorization: `bearer ${token}`,
+          },
+        }
+      )
       .then((res) => {
         setClientSecret(res.data.clientSecret);
       });
@@ -70,7 +79,11 @@ const Checkout = ({ price, classItem }) => {
         classItem: classItem,
       };
       axios
-        .post("http://localhost:5100/payments", paymentInfo)
+        .post("http://localhost:5100/payments", paymentInfo, {
+          headers: {
+            authorization: `bearer ${token}`,
+          },
+        })
         .then((res) =>
           res.data.paymentResult.insertedId
             ? Swal.fire("Payment Succeed", "", "success")
