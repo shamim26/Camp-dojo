@@ -6,7 +6,7 @@ import ImageDisplay from "./ImageDisplay";
 const PopularClass = () => {
   const [classes, setClasses] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:5100/classes")
+    fetch("http://localhost:5100/home-classes")
       .then((res) => res.json())
       .then((data) => setClasses(data));
   }, []);

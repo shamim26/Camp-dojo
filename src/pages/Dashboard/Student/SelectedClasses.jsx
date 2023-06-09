@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import axios from "axios";
 
-const MyClasses = () => {
+const SelectedClasses = () => {
   const token = localStorage.getItem("access-token");
   const { user, loading } = useAuth();
   const { data: selectedClasses = [], refetch } = useQuery({
@@ -40,7 +40,7 @@ const MyClasses = () => {
           .delete(`http://localhost:5100/selected-classes/${id}`)
           .then((res) => {
             if (res.data.deletedCount > 0) {
-              Swal.fire("Deleted!", "Your file has been deleted.", "success");
+              Swal.fire("Deleted!", "", "success");
               refetch();
             }
           });
@@ -120,4 +120,4 @@ const MyClasses = () => {
   );
 };
 
-export default MyClasses;
+export default SelectedClasses;

@@ -7,7 +7,6 @@ import Login from "../pages/Authentication/Login";
 import Registration from "../pages/Authentication/Registration";
 import AllInstructor from "../pages/AllInstructor/AllInstructor";
 import Classes from "../pages/Classes/Classes";
-import MyClasses from "../pages/Dashboard/Student/MyClasses";
 import Payment from "../pages/Dashboard/Student/Payment/Payment";
 import EnrolledClass from "../pages/Dashboard/Student/EnrolledClass";
 import PaymentHistory from "../pages/Dashboard/Student/PaymentHistory";
@@ -15,6 +14,10 @@ import PrivateRoutes from "./PrivateRoutes";
 import AdminRoutes from "./AdminRoutes";
 import ManageClass from "../pages/Dashboard/Admin/ManageClass";
 import ManageUser from "../pages/Dashboard/Admin/ManageUser";
+import InstructorRoutes from "./InstructorRoutes";
+import AddClass from "../pages/Dashboard/Instructor/AddClass";
+import SelectedClasses from "../pages/Dashboard/Student/SelectedClasses";
+import MyClasses from "../pages/Dashboard/Instructor/MyClasses";
 
 const router = createBrowserRouter([
   {
@@ -55,8 +58,8 @@ const router = createBrowserRouter([
     children: [
       // student routes
       {
-        path: "my-classes",
-        element: <MyClasses />,
+        path: "selected-classes",
+        element: <SelectedClasses />,
       },
       {
         path: "payment",
@@ -86,6 +89,24 @@ const router = createBrowserRouter([
           <AdminRoutes>
             <ManageUser />
           </AdminRoutes>
+        ),
+      },
+
+      // Instructor Routes
+      {
+        path: "add-class",
+        element: (
+          <InstructorRoutes>
+            <AddClass />
+          </InstructorRoutes>
+        ),
+      },
+      {
+        path: "my-classes",
+        element: (
+          <InstructorRoutes>
+            <MyClasses />
+          </InstructorRoutes>
         ),
       },
     ],

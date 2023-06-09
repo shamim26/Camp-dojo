@@ -10,10 +10,14 @@ import useAuth from "../../hooks/useAuth";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import useAdmin from "../../hooks/useAdmin";
+import useInstructor from "../../hooks/useInstructor";
 
 const SIngleClass = ({ singleClass }) => {
   const { availableSeats } = singleClass;
   const { user } = useAuth();
+  const [isAdmin] = useAdmin();
+  const [isInstructor] = useInstructor();
   const navigate = useNavigate();
 
   const handleSelect = (clas) => {
@@ -99,7 +103,9 @@ const SIngleClass = ({ singleClass }) => {
         <CardFooter className="pt-0">
           <Button
             onClick={() => handleSelect(singleClass)}
-            disabled={availableSeats === 0}
+            disabled={
+              availableSeats === 0 || isAdmin?.admin || isInstructor?.instructor
+            }
             ripple={false}
             fullWidth={true}
             className="bg-black rounded-full text-white shadow-none hover:bg-custom1 hover:shadow-none hover:scale-105 focus:shadow-none"
