@@ -1,0 +1,48 @@
+import { useForm } from "react-hook-form";
+
+const Modal = ({ open, handleOpen, classItem }) => {
+  const { register, handleSubmit, reset } = useForm();
+
+  const onSubmit = (data) => {
+    console.log(data);
+    reset()
+    handleOpen()
+    // TODO: update feedback to all classes in databaseS.
+  };
+  return (
+    <div>
+      {open && (
+        <div className="fixed inset-0 flex items-center justify-center z-50 backdrop-filter backdrop-blur-sm">
+          <div className="bg-white p-6 rounded shadow-md">
+            <h2 className="text-lg font-semibold mb-4">Feedback</h2>
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <textarea
+                {...register("feedback")}
+                className="border-4"
+                cols="30"
+                rows="10"
+              ></textarea>
+
+              <div className="flex justify-end">
+                <button
+                  onClick={handleOpen}
+                  className="text-gray-500 hover:text-gray-600 font-semibold mr-4"
+                >
+                  Close
+                </button>
+                <button
+                  type="submit"
+                  className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded"
+                >
+                  Send
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default Modal;
