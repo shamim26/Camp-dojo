@@ -9,7 +9,7 @@ const useInstructor = () => {
     enabled: !loading,
     queryFn: async () => {
       const res = await fetch(
-        `http://localhost:5100/users/instructor/${user?.email}`,
+        `https://camp-dojo-server.vercel.app/users/instructor/${user?.email}`,
         {
           headers: {
             authorization: `bearer ${token}`,

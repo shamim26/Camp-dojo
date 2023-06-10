@@ -1,19 +1,23 @@
-import React from "react";
+import React, { useContext } from "react";
 import PageBanner from "../../components/PageBanner/PageBanner";
 import { useQuery } from "react-query";
 import SIngleClass from "./SIngleClass";
 import { Spinner } from "@material-tailwind/react";
+import { DarkContext } from "../../context/DarkMoodContext";
 
 const Classes = () => {
+  const { isDarkMode } = useContext(DarkContext);
   const { data: classes = [], isLoading } = useQuery({
     queryKey: ["approved-classes"],
     queryFn: async () => {
-      const res = await fetch("http://localhost:5100/approved-classes");
+      const res = await fetch(
+        "https://camp-dojo-server.vercel.app/approved-classes"
+      );
       return res.json();
     },
   });
   return (
-    <div className="bg-blue-gray-50">
+    <div className={isDarkMode ? "bg-custom2" : "bg-gray-100"}>
       <PageBanner heading={"Classes"} />
       {isLoading ? (
         <div className="flex justify-center items-center h-96">

@@ -12,7 +12,7 @@ const PaymentHistory = () => {
     enabled: !loading,
     queryFn: async () => {
       const res = await fetch(
-        `http://localhost:5100/payment-history?email=${user?.email}`,
+        `https://camp-dojo-server.vercel.app/payment-history?email=${user?.email}`,
         {
           headers: {
             authorization: `bearer ${token}`,

@@ -32,7 +32,10 @@ const SIngleClass = ({ singleClass }) => {
         studentEmail: user?.email,
       };
       axios
-        .post("http://localhost:5100/selected-classes", classOrder)
+        .post(
+          "https://camp-dojo-server.vercel.app/selected-classes",
+          classOrder
+        )
         .then((res) => {
           if (res.data.insertedId) {
             Swal.fire(

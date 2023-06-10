@@ -54,7 +54,7 @@ const AuthContext = ({ children }) => {
       setUser(currentUser);
       if (currentUser) {
         axios
-          .post("http://localhost:5100/jwt", {
+          .post("https://camp-dojo-server.vercel.app/jwt", {
             email: currentUser.email,
           })
           .then((data) => {

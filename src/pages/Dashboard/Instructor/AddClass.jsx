@@ -35,7 +35,7 @@ const AddClass = () => {
           };
           console.log(newClass);
           axios
-            .post("http://localhost:5100/classes", newClass, {
+            .post("https://camp-dojo-server.vercel.app/classes", newClass, {
               headers: { authorization: `bearer ${token}` },
             })
             .then((res) => {

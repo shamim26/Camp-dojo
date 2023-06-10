@@ -19,7 +19,7 @@ const Registration = () => {
     reset,
     formState: { errors },
   } = useForm();
-  
+
   const onSubmit = (data) => {
     if (data?.password !== data?.confirmPassword) {
       return setPasswordError("Please confirm password");
@@ -36,12 +36,14 @@ const Registration = () => {
             email: data?.email,
             role: "student",
           };
-          axios.post("http://localhost:5100/users", userInfo).then((res) => {
-            if (res.data.insertedId) {
-              reset();
-              navigate("/");
-            }
-          });
+          axios
+            .post("https://camp-dojo-server.vercel.app/users", userInfo)
+            .then((res) => {
+              if (res.data.insertedId) {
+                reset();
+                navigate("/");
+              }
+            });
         });
       })
       .catch((err) => console.error(err));

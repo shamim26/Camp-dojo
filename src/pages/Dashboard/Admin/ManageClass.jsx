@@ -13,11 +13,14 @@ const ManageClass = () => {
   const { data: allClass = [], refetch } = useQuery({
     queryKey: ["all-classes"],
     queryFn: async () => {
-      const res = await fetch("http://localhost:5100/all-classes", {
-        headers: {
-          authorization: `bearer ${token}`,
-        },
-      });
+      const res = await fetch(
+        "https://camp-dojo-server.vercel.app/all-classes",
+        {
+          headers: {
+            authorization: `bearer ${token}`,
+          },
+        }
+      );
       return res.json();
     },
   });
@@ -26,7 +29,7 @@ const ManageClass = () => {
     // TODO: update status of classes to approved or denied
     console.log(data);
     axios
-      .put("http://localhost:5100/classes-status", data, {
+      .put("https://camp-dojo-server.vercel.app/classes-status", data, {
         headers: { authorization: `bearer ${token}` },
       })
       .then((res) => {

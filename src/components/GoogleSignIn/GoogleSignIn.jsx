@@ -17,12 +17,14 @@ const GoogleSignIn = () => {
           email: user?.email,
           role: "student",
         };
-        axios.post("http://localhost:5100/users", userInfo).then((res) => {
-          if (res.data.insertedId) {
+        axios
+          .post("https://camp-dojo-server.vercel.app/users", userInfo)
+          .then((res) => {
+            if (res.data.insertedId) {
+              navigate("/");
+            }
             navigate("/");
-          }
-          navigate("/");
-        });
+          });
       })
       .catch((err) => console.error(err));
   };

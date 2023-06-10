@@ -1,19 +1,21 @@
-import React from "react";
+import React, { useContext } from "react";
 import PageBanner from "../../components/PageBanner/PageBanner";
 import { useQuery } from "react-query";
 import SingleInstructor from "./SingleInstructor";
 import { Spinner } from "@material-tailwind/react";
+import { DarkContext } from "../../context/DarkMoodContext";
 
 const AllInstructor = () => {
+  const { isDarkMode } = useContext(DarkContext);
   const { data: instructors = [], isLoading } = useQuery({
     queryKey: ["instructors"],
     queryFn: async () => {
-      const res = await fetch("http://localhost:5100/users");
+      const res = await fetch("https://camp-dojo-server.vercel.app/users");
       return res.json();
     },
   });
   return (
-    <div className="bg-gray-100">
+    <div className={isDarkMode ? "bg-custom2" : "bg-gray-100"}>
       <PageBanner heading={"Instructors"} />
       {isLoading ? (
         <div className="flex justify-center items-center h-96">

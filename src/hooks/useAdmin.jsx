@@ -9,7 +9,7 @@ const useAdmin = () => {
     enabled: !loading,
     queryFn: async () => {
       const res = await fetch(
-        `http://localhost:5100/users/admin/${user?.email}`,
+        `https://camp-dojo-server.vercel.app/users/admin/${user?.email}`,
         {
           headers: {
             authorization: `bearer ${token}`,

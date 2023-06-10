@@ -16,7 +16,7 @@ const Checkout = ({ price, classItem }) => {
   useEffect(() => {
     axios
       .post(
-        "http://localhost:5100/create-payment-intents",
+        "https://camp-dojo-server.vercel.app/create-payment-intents",
         { price },
         {
           headers: {
@@ -79,7 +79,7 @@ const Checkout = ({ price, classItem }) => {
         classItem: classItem,
       };
       axios
-        .post("http://localhost:5100/payments", paymentInfo, {
+        .post("https://camp-dojo-server.vercel.app/payments", paymentInfo, {
           headers: {
             authorization: `bearer ${token}`,
           },

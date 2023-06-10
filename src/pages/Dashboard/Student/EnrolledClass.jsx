@@ -11,7 +11,7 @@ const EnrolledClass = () => {
     enabled: !loading,
     queryFn: async () => {
       const res = await fetch(
-        `http://localhost:5100/enrolled-classes?email=${user?.email}`,
+        `https://camp-dojo-server.vercel.app/enrolled-classes?email=${user?.email}`,
         {
           headers: {
             authorization: `bearer ${token}`,

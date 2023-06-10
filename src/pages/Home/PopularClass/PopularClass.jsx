@@ -1,31 +1,44 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import ImageDisplay from "./ImageDisplay";
+import { DarkContext } from "../../../context/DarkMoodContext";
 
 const PopularClass = () => {
+  const { isDarkMode } = useContext(DarkContext);
+
   const [classes, setClasses] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:5100/home-classes")
+    fetch("https://camp-dojo-server.vercel.app/home-classes")
       .then((res) => res.json())
       .then((data) => setClasses(data));
   }, []);
 
   return (
-    <div className="container w-9/12 mx-auto my-32">
-      <h1 className="font-heading font-medium text-3xl text-center mb-2">
-        Popular Classes
-      </h1>
-      <Link
-        className="flex justify-center text-custom1 text-sm font-semibold mb-16"
-        to="/classes"
-      >
-        More Class
-      </Link>
+    <div className={isDarkMode ? "bg-custom2" : ""}>
+      <div className="container w-9/12 mx-auto py-32">
+        <h1
+          className={`${
+            isDarkMode ? "text-gray-300" : "text-black"
+          } font-heading font-medium text-3xl text-center mb-2`}
+        >
+          Popular Classes
+        </h1>
+        <Link
+          className="flex justify-center text-custom1 text-sm font-semibold mb-16"
+          to="/classes"
+        >
+          More Class
+        </Link>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-5 p-6 bg-[#f0f0f4]">
-        {classes.map((classItem) => (
-          <ImageDisplay key={classItem?._id} classItem={classItem} />
-        ))}
+        <div
+          className={`grid grid-cols-1 md:grid-cols-3 gap-5 p-6 ${
+            isDarkMode ? "bg-[#2a264d]" : "bg-[#f0f0f4]"
+          } `}
+        >
+          {classes.map((classItem) => (
+            <ImageDisplay key={classItem?._id} classItem={classItem} />
+          ))}
+        </div>
       </div>
     </div>
   );

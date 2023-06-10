@@ -1,17 +1,20 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import logo from "../../assets/logo(2).png";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import { Tooltip } from "@material-tailwind/react";
 import useAdmin from "../../hooks/useAdmin";
 import useInstructor from "../../hooks/useInstructor";
 import { motion } from "framer-motion";
+import DarkModeToggle from "react-dark-mode-toggle";
+import { DarkContext } from "../../context/DarkMoodContext";
 
 const Navbar = () => {
   const { user, loading, logOut } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
   const [isAdmin] = useAdmin();
   const [isInstructor] = useInstructor();
+  const { isDarkMode, setIsDarkMode } = useContext(DarkContext);
 
   const handleLogout = () => {
     logOut()
@@ -22,12 +25,16 @@ const Navbar = () => {
   };
 
   const variants = {
-    open: { opacity: 0, x: '-100%' },
+    open: { opacity: 0, x: "-100%" },
     closed: { opacity: 1, x: 0 },
   };
 
   return (
-    <div className="bg-custom1 fixed top-0 right-0 left-0 z-10 bg-opacity-50 uppercase py-1 flex justify-between items-center px-10">
+    <div
+      className={` ${
+        isDarkMode ? "bg-custom2" : "bg-custom1"
+      } fixed top-0 right-0 left-0 z-10 uppercase py-1 flex justify-between items-center px-10`}
+    >
       <img
         className="md:w-[280px] w-[200px] md:h-[90px] object-contain cursor-pointer  "
         src={logo}
@@ -59,21 +66,57 @@ const Navbar = () => {
             />
           </svg>
         </button>
-        <Link to="/">Home</Link>
-        <Link to="/instructors"> Instructors</Link>
-        <Link to="/classes">Classes</Link>
+        <NavLink
+          className={(isActive) =>
+            isActive.isActive ? "bg-white text-custom1 px-2 rounded-full" : ""
+          }
+          to="/"
+        >
+          Home
+        </NavLink>
+        <NavLink
+          className={(isActive) =>
+            isActive.isActive ? "bg-white text-custom1 px-2 rounded-full" : ""
+          }
+          to="/instructors"
+        >
+          {" "}
+          Instructors
+        </NavLink>
+        <NavLink
+          className={(isActive) =>
+            isActive.isActive ? "bg-white text-custom1 px-2 rounded-full" : ""
+          }
+          to="/classes"
+        >
+          Classes
+        </NavLink>
         {user && (
           <>
             {isAdmin?.admin ? (
-              <Link to="/dashboard/manage-classes">Dashboard</Link>
+              <NavLink to="/dashboard/manage-classes">Dashboard</NavLink>
             ) : isInstructor?.instructor ? (
-              <Link to="/dashboard/add-class">Dashboard</Link>
+              <NavLink to="/dashboard/add-class">Dashboard</NavLink>
             ) : (
-              <Link to="/dashboard/selected-classes">Dashboard</Link>
+              <NavLink to="/dashboard/selected-classes">Dashboard</NavLink>
             )}
           </>
         )}
-        {!user && <Link to="/login">Login</Link>}
+        {!user && (
+          <NavLink
+            className={(isActive) =>
+              isActive.isActive ? "bg-white text-custom1 px-2 rounded-full" : ""
+            }
+            to="/login"
+          >
+            Login
+          </NavLink>
+        )}
+        <DarkModeToggle
+          onChange={setIsDarkMode}
+          checked={isDarkMode}
+          size={50}
+        />
 
         {user && !loading && (
           <div className="flex flex-col md:flex-row gap-3 items-center md:ml-[18rem]">

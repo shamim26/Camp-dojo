@@ -15,7 +15,7 @@ const SelectedClasses = () => {
     enabled: !loading,
     queryFn: async () => {
       const res = await fetch(
-        `http://localhost:5100/selected-classes?email=${user?.email}`,
+        `https://camp-dojo-server.vercel.app/selected-classes?email=${user?.email}`,
         {
           headers: {
             authorization: `bearer ${token}`,
@@ -37,7 +37,7 @@ const SelectedClasses = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .delete(`http://localhost:5100/selected-classes/${id}`)
+          .delete(`https://camp-dojo-server.vercel.app/selected-classes/${id}`)
           .then((res) => {
             if (res.data.deletedCount > 0) {
               Swal.fire("Deleted!", "", "success");

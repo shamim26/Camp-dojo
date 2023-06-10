@@ -10,7 +10,7 @@ const MyClasses = () => {
     queryKey: ["my-classes", user?.email],
     queryFn: async () => {
       const res = await fetch(
-        `http://localhost:5100/my-classes?email=${user?.email}`,
+        `https://camp-dojo-server.vercel.app/my-classes?email=${user?.email}`,
         { headers: { authorization: `bearer ${token}` } }
       );
       return res.json();

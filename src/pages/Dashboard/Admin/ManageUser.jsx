@@ -10,7 +10,7 @@ const ManageUser = () => {
   const { data: allUsers = [], refetch } = useQuery({
     queryKey: ["all-users"],
     queryFn: async () => {
-      const res = await fetch("http://localhost:5100/all-users", {
+      const res = await fetch("https://camp-dojo-server.vercel.app/all-users", {
         headers: { authorization: `bearer ${token}` },
       });
       return res.json();
@@ -19,7 +19,7 @@ const ManageUser = () => {
 
   const handleUpdateRole = (role) => {
     axios
-      .put("http://localhost:5100/all-users", role, {
+      .put("https://camp-dojo-server.vercel.app/all-users", role, {
         headers: { authorization: `bearer ${token}` },
       })
       .then((res) => {

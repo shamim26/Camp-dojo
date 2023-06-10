@@ -14,7 +14,7 @@ const Modal = ({ open, handleOpen, id }) => {
     reset();
     handleOpen();
     axios
-      .put("http://localhost:5100/classes-feedback", newData, {
+      .put("https://camp-dojo-server.vercel.app/classes-feedback", newData, {
         headers: { authorization: `bearer ${token}` },
       })
       .then((res) => {

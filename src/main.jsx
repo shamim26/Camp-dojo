@@ -6,6 +6,7 @@ import router from "./Routes/routes.jsx";
 import { ThemeProvider } from "@material-tailwind/react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import AuthContext from "./context/AuthContext";
+import DarkMoodContext from "./context/DarkMoodContext";
 
 const queryClient = new QueryClient();
 ReactDOM.createRoot(document.getElementById("root")).render(
@@ -13,7 +14,9 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <AuthContext>
       <QueryClientProvider client={queryClient}>
         <ThemeProvider>
-          <RouterProvider router={router} />
+          <DarkMoodContext>
+            <RouterProvider router={router} />
+          </DarkMoodContext>
         </ThemeProvider>
       </QueryClientProvider>
     </AuthContext>

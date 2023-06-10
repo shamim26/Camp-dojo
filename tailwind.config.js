@@ -13,6 +13,7 @@ module.exports = withMT({
       },
       colors: {
         custom1: "#ff4f03",
+        custom2: "#03001C",
       },
     },
   },
@@ -21,4 +22,4 @@ module.exports = withMT({
 
 // colors:
 
-// #ff4f03, #011102, #f1f1f1, #414045, #f2ad85, #935002
+// #ff4f03, #011102, #f1f1f1, #414045, #f2ad85, #935002 #212026
