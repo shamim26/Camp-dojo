@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 import useAdmin from "../hooks/useAdmin";
 import useAuth from "../hooks/useAuth";
 import { Spinner } from "@material-tailwind/react";
@@ -16,7 +16,7 @@ const AdminRoutes = ({ children }) => {
     );
   }
 
-  if (user && isAdmin) {
+  if (user && isAdmin?.admin) {
     return children;
   }
   return <Navigate to="/" state={{ from: location }} replace></Navigate>;

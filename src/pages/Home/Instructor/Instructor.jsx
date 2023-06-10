@@ -4,11 +4,7 @@ import { Link } from "react-router-dom";
 import InstructorImage from "./InstructorImage";
 
 const Instructor = () => {
-  const {
-    data: instructors = [],
-    isLoading,
-    refetch,
-  } = useQuery({
+  const { data: instructors = [], isLoading } = useQuery({
     queryKey: ["instructors"],
     queryFn: async () => {
       const res = await fetch("http://localhost:5100/users");
@@ -27,7 +23,7 @@ const Instructor = () => {
         All Instructors
       </Link>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        {instructors.map((instructor) => (
+        {instructors.slice(0,6).map((instructor) => (
           <InstructorImage key={instructor?._id} instructor={instructor} />
         ))}
       </div>

@@ -1,7 +1,8 @@
 import { Button, Carousel } from "@material-tailwind/react";
-import image1 from "../../assets/slider/slide(1).jpg";
-import image2 from "../../assets/slider/slide(2).jpg";
-import image3 from "../../assets/slider/slide(3).jpg";
+// import image1 from "../../assets/slider/slide(1).jpg";
+// import image2 from "../../assets/slider/slide(2).jpg";
+// import image3 from "../../assets/slider/slide(3).jpg";
+import { AttentionSeeker, Bounce, Fade, Slide } from "react-awesome-reveal";
 
 const Slider = () => {
   return (
@@ -9,7 +10,7 @@ const Slider = () => {
       autoplay={true}
       autoplayDelay={5000}
       loop={true}
-      navigation={''}
+      navigation={""}
       className="h-screen"
     >
       <div className="relative h-full w-full">
@@ -20,9 +21,7 @@ const Slider = () => {
         />
         <div className="absolute inset-0 grid h-full w-full place-items-center bg-custom1 bg-opacity-75">
           <div className="w-3/4 font-heading text-center text-white md:w-2/4 ">
-            <h1 className="text-5xl leading-[4rem] uppercase font-bold">
-              "The best fighter is never angry." <br /> - Lao Tzu
-            </h1>
+            
           </div>
         </div>
       </div>
@@ -34,12 +33,17 @@ const Slider = () => {
         />
         <div className="absolute inset-0 grid h-full w-full place-items-center bg-custom1 bg-opacity-75">
           <div className="w-3/4 font-heading text-center text-white md:w-2/4 ">
-            <h1 className="text-5xl leading-[4rem] uppercase font-bold">
-              Immerse Yourself in Martial Arts Excellence at Camp Dojo
-            </h1>
-            <Button className="py-7 px-10 rounded-full bg-black">
+            <AttentionSeeker effect="jello">
+              <h1 className="text-5xl leading-[4rem] uppercase font-bold">
+                Immerse Yourself in Martial Arts Excellence at Camp Dojo
+              </h1>
+            </AttentionSeeker>
+            <AttentionSeeker effect="flash">
+              <Button className="py-7 px-10 rounded-full bg-black">
               Explore
             </Button>
+            </AttentionSeeker>
+            
           </div>
         </div>
       </div>

@@ -6,8 +6,9 @@ import useAuth from "../../hooks/useAuth";
 import GoogleSignIn from "../../components/GoogleSignIn/GoogleSignIn";
 
 const Login = () => {
-  const { signIn, googleSignIn } = useAuth();
+  const { signIn } = useAuth();
   const [hidden, setHidden] = useState(true);
+  const [errorMsg, setErrorMsg] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -23,10 +24,10 @@ const Login = () => {
     signIn(data?.email, data?.password)
       .then((result) => {
         const loggedUser = result.user;
-        console.log(loggedUser);
+        setErrorMsg("");
         navigate(from, { replace: true });
       })
-      .catch((err) => console.error(err));
+      .catch((err) => setErrorMsg(err.message));
   };
 
   return (
@@ -55,6 +56,7 @@ const Login = () => {
           {errors.password && (
             <small className="text-red-500">Please enter your password</small>
           )}
+          {errorMsg && <small className="text-red-500">{errorMsg}</small>}
           <span
             onClick={() => setHidden(!hidden)}
             className="absolute top-[9.7rem] right-10 cursor-pointer"
@@ -94,7 +96,7 @@ const Login = () => {
             </span>
           </div>
           <small className="font-light cursor-pointer"> Or login with</small>
-          <GoogleSignIn/>
+          <GoogleSignIn />
           <Link
             to="/registration"
             className="font-medium border-b-2 border-white hover:border-custom1 duration-300 w-[160px]"

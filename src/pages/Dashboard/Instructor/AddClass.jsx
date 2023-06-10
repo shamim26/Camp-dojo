@@ -10,28 +10,30 @@ const AddClass = () => {
   const { user } = useAuth();
   const { register, handleSubmit, reset } = useForm();
 
-  const onSubmit = (data) => {
-    const formData = new FormData();
-    formData.append("image", data.image[0]);
-    fetch(
-      `https://api.imgbb.com/1/upload?&key=${import.meta.env.VITE_IMAGE_TOKEN}`,
-      { method: "POST", body: formData }
-    )
-      .then((res) => res.json())
+  const onSubmit = (formData) => {
+    const formDataImage = new FormData();
+    formDataImage.append("image", formData.image[0]);
+    axios
+      .post(
+        `https://api.imgbb.com/1/upload?&key=${
+          import.meta.env.VITE_IMAGE_TOKEN
+        }`,
+        formDataImage
+      )
       .then((imgData) => {
-        if (imgData.success) {
-          const imageUrl = imgData.data.display_url;
+        if (imgData.data.success) {
+          const imageUrl = imgData.data.data.display_url;
           const newClass = {
             image: imageUrl,
-            name: data?.name,
-            instructorName: data?.instructorName,
-            instructorEmail: data?.instructorEmail,
-            availableSeats: parseInt(data?.availableSeats),
-            price: parseFloat(data?.price),
+            name: formData?.name,
+            instructorName: formData?.instructorName,
+            instructorEmail: formData?.instructorEmail,
+            availableSeats: parseInt(formData?.availableSeats),
+            price: parseFloat(formData?.price),
             status: "pending",
             enrolledStudents: 0,
           };
-
+          console.log(newClass);
           axios
             .post("http://localhost:5100/classes", newClass, {
               headers: { authorization: `bearer ${token}` },

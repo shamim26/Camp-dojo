@@ -16,7 +16,7 @@ const InstructorRoutes = ({ children }) => {
     );
   }
 
-  if (user && isInstructor) {
+  if (user && isInstructor?.instructor) {
     return children;
   }
   return <Navigate to="/" state={{ from: location }} replace></Navigate>;

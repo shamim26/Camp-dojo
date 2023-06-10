@@ -3,10 +3,15 @@ import logo from "../../assets/logo(2).png";
 import { Link } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import { Tooltip } from "@material-tailwind/react";
+import useAdmin from "../../hooks/useAdmin";
+import useInstructor from "../../hooks/useInstructor";
+import { motion } from "framer-motion";
 
 const Navbar = () => {
-  const { user, logOut } = useAuth();
+  const { user, loading, logOut } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
+  const [isAdmin] = useAdmin();
+  const [isInstructor] = useInstructor();
 
   const handleLogout = () => {
     logOut()
@@ -16,8 +21,13 @@ const Navbar = () => {
       .catch((err) => console.error(err));
   };
 
+  const variants = {
+    open: { opacity: 0, x: '-100%' },
+    closed: { opacity: 1, x: 0 },
+  };
+
   return (
-    <div className="bg-custom1 fixed top-0 right-0 left-0 z-10 bg-opacity-75 uppercase py-1 flex justify-between items-center px-10">
+    <div className="bg-custom1 fixed top-0 right-0 left-0 z-10 bg-opacity-50 uppercase py-1 flex justify-between items-center px-10">
       <img
         className="md:w-[280px] w-[200px] md:h-[90px] object-contain cursor-pointer  "
         src={logo}
@@ -52,10 +62,20 @@ const Navbar = () => {
         <Link to="/">Home</Link>
         <Link to="/instructors"> Instructors</Link>
         <Link to="/classes">Classes</Link>
-        {user && <Link to="/dashboard">Dashboard</Link>}
+        {user && (
+          <>
+            {isAdmin?.admin ? (
+              <Link to="/dashboard/manage-classes">Dashboard</Link>
+            ) : isInstructor?.instructor ? (
+              <Link to="/dashboard/add-class">Dashboard</Link>
+            ) : (
+              <Link to="/dashboard/selected-classes">Dashboard</Link>
+            )}
+          </>
+        )}
         {!user && <Link to="/login">Login</Link>}
 
-        {user && (
+        {user && !loading && (
           <div className="flex flex-col md:flex-row gap-3 items-center md:ml-[18rem]">
             <Tooltip content={user?.displayName}>
               <img
@@ -74,7 +94,12 @@ const Navbar = () => {
           </div>
         )}
       </div>
-      <button className="md:hidden" onClick={() => setIsOpen(true)}>
+      <motion.button
+        animate={isOpen ? "open" : "closed"}
+        variants={variants}
+        className="md:hidden"
+        onClick={() => setIsOpen(true)}
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -89,7 +114,7 @@ const Navbar = () => {
             d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
           />
         </svg>
-      </button>
+      </motion.button>
     </div>
   );
 };
