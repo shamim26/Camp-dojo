@@ -33,7 +33,6 @@ const AddClass = () => {
             status: "pending",
             enrolledStudents: 0,
           };
-          console.log(newClass);
           axios
             .post("https://camp-dojo-server.vercel.app/classes", newClass, {
               headers: { authorization: `bearer ${token}` },
@@ -97,6 +96,7 @@ const AddClass = () => {
             {...register("price", { required: true })}
             className="w-full text-light-blue-500 border-b-2 border-black outline-none p-2"
             type="text"
+            placeholder="Please Type Price in number"
           />
         </div>
         <div className="col-span-2 w-full">

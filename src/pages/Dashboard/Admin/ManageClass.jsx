@@ -26,7 +26,6 @@ const ManageClass = () => {
   });
 
   const handleUpdateStatus = (data) => {
-    console.log(data);
     axios
       .put("https://camp-dojo-server.vercel.app/classes-status", data, {
         headers: { authorization: `bearer ${token}` },

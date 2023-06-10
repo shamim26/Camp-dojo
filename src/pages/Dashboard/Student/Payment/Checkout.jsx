@@ -64,12 +64,12 @@ const Checkout = ({ price, classItem }) => {
         },
       });
     if (paymentError) {
-      console.log(paymentError);
+      setCardError(paymentError.message);
     }
 
     if (paymentIntent.status === "succeeded") {
       setTransactionId(paymentIntent.id);
-
+      setCardError('')
       //   payment history
       const paymentInfo = {
         email: user?.email,
