@@ -45,7 +45,7 @@ const Navbar = () => {
        md:static md:flex-row gap-4
        transition-all duration-300
         md:gap-8 font-medium text-white
-         h-screen md:h-auto bg-custom1
+         h-screen md:h-auto ${isDarkMode ? "bg-custom2" : "bg-custom1"}
           md:bg-transparent top-0  w-1/2
            md:w-auto items-start md:items-center
            py-10 px-10 md:p-0 ${isOpen ? "left-0" : "-left-72"} `}

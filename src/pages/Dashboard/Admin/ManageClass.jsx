@@ -26,7 +26,6 @@ const ManageClass = () => {
   });
 
   const handleUpdateStatus = (data) => {
-    // TODO: update status of classes to approved or denied
     console.log(data);
     axios
       .put("https://camp-dojo-server.vercel.app/classes-status", data, {
