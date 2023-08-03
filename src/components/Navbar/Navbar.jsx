@@ -91,6 +91,22 @@ const Navbar = () => {
         >
           Classes
         </NavLink>
+        <NavLink
+          className={(isActive) =>
+            isActive.isActive ? "bg-white text-custom1 px-2 rounded-full" : ""
+          }
+          to="/blog"
+        >
+          Blog
+        </NavLink>
+        <NavLink
+          className={(isActive) =>
+            isActive.isActive ? "bg-white text-custom1 px-2 rounded-full" : ""
+          }
+          to="/about"
+        >
+          About
+        </NavLink>
         {user && (
           <>
             {isAdmin?.admin ? (
