@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { DarkContext } from "../../../context/DarkMoodContext";
 
+
 const InstructorImage = ({ instructor }) => {
   const { isDarkMode } = useContext(DarkContext);
   return (

@@ -1,7 +1,7 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper";
 import "swiper/css";
-import { AttentionSeeker, Fade, Slide } from "react-awesome-reveal";
+import { AttentionSeeker, Fade } from "react-awesome-reveal";
 import { Button } from "@material-tailwind/react";
 import { useContext } from "react";
 import { DarkContext } from "../../context/DarkMoodContext";
@@ -24,11 +24,12 @@ const HomeSlider = () => {
           }}
         >
           <div className="flex flex-col text-white justify-center items-center h-screen w-2/5 mx-auto">
-            <AttentionSeeker duration={1000}>
-              <h1 className="text-3xl md:text-5xl leading-[4rem] uppercase font-bold">
-                "The best fighter is never angry." <br /> - Lao Tzu
-              </h1>
-            </AttentionSeeker>
+            <h1 className="text-3xl md:text-5xl leading-[4rem] uppercase font-bold">
+              <Fade delay={1} duration={500} direction="down" cascade>
+                <span>"The best fighter is</span> <span> never angry."</span>{" "}
+                <span>- Lao Tzu</span>
+              </Fade>
+            </h1>
           </div>
         </SwiperSlide>
         <SwiperSlide
@@ -42,13 +43,13 @@ const HomeSlider = () => {
         >
           <div className="flex flex-col text-white justify-center items-center h-screen w-2/5 mx-auto">
             <h1 className="text-3xl md:text-5xl leading-[4rem] uppercase font-bold">
-              <Fade delay={1e3} duration={500} direction="down" cascade>
+              <Fade delay={1} duration={500} direction="down" cascade>
                 <span>Immerse Yourself in</span> <span>Martial Arts</span>{" "}
                 <span>Excellence at Camp Dojo</span>
               </Fade>
             </h1>
-            <AttentionSeeker effect="flash">
-              <Button className="py-7 px-10 rounded-full bg-black">
+            <AttentionSeeker effect="pulse">
+              <Button className="py-7 px-10 rounded-full hover:bg-gray-400 bg-black">
                 Explore
               </Button>
             </AttentionSeeker>
@@ -65,7 +66,7 @@ const HomeSlider = () => {
         >
           <div className="flex flex-col text-white justify-center items-center h-screen w-2/5 mx-auto">
             <h1 className="md:text-5xl text-3xl leading-[4rem] uppercase font-bold">
-              <Fade delay={1000} direction="down" cascade>
+              <Fade delay={1} duration={500} direction="down" cascade>
                 <span>Where there is</span> <span>preparation there is no</span>{" "}
                 <span>fear</span>
               </Fade>

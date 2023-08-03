@@ -103,6 +103,14 @@ const Navbar = () => {
           className={(isActive) =>
             isActive.isActive ? "bg-white text-custom1 px-2 rounded-full" : ""
           }
+          to="/events"
+        >
+          Events
+        </NavLink>
+        <NavLink
+          className={(isActive) =>
+            isActive.isActive ? "bg-white text-custom1 px-2 rounded-full" : ""
+          }
           to="/about"
         >
           About
