@@ -5,7 +5,12 @@ import InstructorImage from "./InstructorImage";
 import { DarkContext } from "../../../context/DarkMoodContext";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper";
-import { Card, CardBody, CardHeader, Typography } from "@material-tailwind/react";
+import {
+  Card,
+  CardBody,
+  CardHeader,
+  Typography,
+} from "@material-tailwind/react";
 
 const Instructor = () => {
   const { isDarkMode } = useContext(DarkContext);
@@ -18,7 +23,7 @@ const Instructor = () => {
     },
   });
   return (
-    <div className={isDarkMode ? "bg-custom2" : ""}>
+    <div className={isDarkMode ? "bg-custom2" : " bg-[#f0f0f4]"}>
       <div className="container w-9/12 mx-auto py-32">
         <h1
           className={` font-heading font-bold text-4xl text-center mb-2 ${

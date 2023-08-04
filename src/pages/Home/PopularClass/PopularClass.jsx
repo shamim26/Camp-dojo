@@ -14,7 +14,7 @@ const PopularClass = () => {
   }, []);
 
   return (
-    <div className={isDarkMode ? "bg-custom2" : "bg-[#f0f0f4]"}>
+    <div className={isDarkMode ? "bg-[#2a264d]" : "bg-[#f0f0f4]"}>
       <div className="container w-9/12 mx-auto py-32">
         <h1
           className={`${
