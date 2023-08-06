@@ -6,6 +6,7 @@ import Events from "../Events/Events";
 import Instructor from "../Instructor/Instructor";
 import Para from "../Parallax/Parallax";
 import PopularClass from "../PopularClass/PopularClass";
+import Sponsor from "../Sponsor/Sponsor";
 
 const Home = () => {
   return (
@@ -17,6 +18,7 @@ const Home = () => {
       <Instructor />
       <Para />
       <Blog />
+      <Sponsor />
       <ScrollToTop />
     </div>
   );

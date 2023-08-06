@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
-import InstructorImage from "./InstructorImage";
 import { DarkContext } from "../../../context/DarkMoodContext";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper";
@@ -40,12 +39,26 @@ const Instructor = () => {
         </Link>
         <div className="">
           <Swiper
-            slidesPerView={3}
+            // slidesPerView={3}
             spaceBetween={50}
             centeredSlides={false}
             modules={[Autoplay]}
             autoplay={{ delay: 3000, disableOnInteraction: false }}
             className="mySwiper"
+            breakpoints={{
+              640: {
+                slidesPerView: 1,
+                spaceBetween: 20,
+              },
+              768: {
+                slidesPerView: 2,
+                spaceBetween: 40,
+              },
+              1024: {
+                slidesPerView: 3,
+                spaceBetween: 50,
+              },
+            }}
           >
             {instructors.slice(0, 6).map((instructor) => (
               <SwiperSlide key={instructor?._id}>
@@ -76,9 +89,6 @@ const Instructor = () => {
               </SwiperSlide>
             ))}
           </Swiper>
-          {/* {instructors.slice(0, 6).map((instructor) => (
-            <InstructorImage key={instructor?._id} instructor={instructor} />
-          ))} */}
         </div>
       </div>
     </div>

@@ -8,7 +8,7 @@ import Button from "../../../components/Button/Button";
 const Blog = () => {
   const { isDarkMode } = useContext(DarkContext);
   return (
-    <div className="bg-[#f0f0f4]">
+    <div className={`${isDarkMode ? "bg-custom2" : "bg-[#f0f0f4]"}`}>
       <div className="container w-9/12 mx-auto py-32">
         <h1
           className={` font-heading font-bold text-4xl text-center mb-2 ${

@@ -10,17 +10,17 @@ const Para = () => {
       {/* <img src={logo} alt="" /> */}
       <div className="container w-9/12 mx-auto text-white flex flex-col items-start gap-6 md:gap-16">
         <h1 className="space-y-2">
-          <span className=" block text-4xl font-bold tracking-[1.4rem] pl-3">
+          <span className=" block text-4xl font-bold tracking-wider md:tracking-[1.4rem] pl-3">
             MARTIAL ARTS
           </span>{" "}
-          <span className=" block text-8xl font-bold tracking-[0.6rem]">
+          <span className=" block text-8xl font-bold md:tracking-[0.6rem]">
             OPEN DAY
           </span>{" "}
-          <span className=" block text-3xl font-bold tracking-wider pl-10">
+          <span className=" block text-3xl font-bold tracking-wider md:pl-10">
             4th March 00 AM to 00 PM
           </span>
         </h1>
-        <div className="flex gap-10 justify-center ml-16">
+        <div className="flex gap-10 justify-center md:ml-16">
           <button className="uppercase font-medium text-sm px-7 py-3 rounded-full bg-[#212226] hover:bg-custom1">
             Details
           </button>

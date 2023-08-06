@@ -25,7 +25,7 @@ const ScrollToTop = () => {
     <div>
       <button
         onClick={scrollToTop}
-        className={`fixed md:bottom-14 bottom-6 md:right-10 right-3 bg-custom1 shadow-lg shadow-deep-orange-900 p-3 z-10 ${
+        className={`fixed md:bottom-14 bottom-6 md:right-10 right-3 bg-custom1  shadow-deep-orange-900 p-3 z-10 ${
           visible ? "inline" : "hidden"
         }`}
       >
