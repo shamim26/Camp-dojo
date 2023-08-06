@@ -5,7 +5,7 @@ const Para = () => {
   return (
     <div
       style={{ backgroundImage: `url(${bg})` }}
-      className="h-screen bg-gray-400 bg-blend-multiply bg-cover bg-fixed bg-center mb-32 flex items-center"
+      className="h-screen bg-gray-400 bg-blend-multiply bg-cover bg-fixed bg-center flex items-center"
     >
       {/* <img src={logo} alt="" /> */}
       <div className="container w-9/12 mx-auto text-white flex flex-col items-start gap-6 md:gap-16">

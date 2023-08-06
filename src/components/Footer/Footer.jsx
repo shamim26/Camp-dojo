@@ -46,6 +46,7 @@ const Footer = () => {
         </svg>
       </div>
       <p>
+        <span className="text-custom1 cursor-pointer">Shamim </span>
         © 2023. All Rights Reserved.{" "}
         <span className="text-custom1 cursor-pointer">
           Terms and Conditions
